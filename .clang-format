@@ -1,0 +1,9 @@
+---
+BasedOnStyle: LLVM
+BreakBeforeBraces: Attach
+# Set indentation to 4 spaces
+IndentWidth: 4
+# Ensure tab characters are also interpreted as 4 spaces
+TabWidth: 4
+# Optional: Use spaces instead of tab characters
+UseTab: Never
