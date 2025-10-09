@@ -26,28 +26,30 @@ void insertAtEnd(struct Node** head, int value) {
     newNode->prev = temp;
 }
 
-void deleteAtBeginning(struct Node** head) {
-    if (*head == NULL) {
-        printf("List is empty. Nothing to delete.\n");
-        return;
-    }
-
-    struct Node* temp = *head;
-    *head = (*head)->next;
-
-    if (*head != NULL)
-        (*head)->prev = NULL;
-
-    printf("Deleted node with data: %d\n", temp->data);
-    free(temp);
-}
-
-void display(struct Node* head) {
+void displayForward(struct Node* head) {
     struct Node* temp = head;
-    printf("Doubly Linked List: ");
+    printf("Forward Traversal: ");
     while (temp != NULL) {
         printf("%d ", temp->data);
         temp = temp->next;
+    }
+    printf("\n");
+}
+
+void displayBackward(struct Node* head) {
+    if (head == NULL) {
+        printf("List is empty.\n");
+        return;
+    }
+
+    struct Node* temp = head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    printf("Backward Traversal: ");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->prev;
     }
     printf("\n");
 }
@@ -60,13 +62,8 @@ int main() {
     insertAtEnd(&head, 30);
     insertAtEnd(&head, 40);
 
-    printf("Before deletion:\n");
-    display(head);
-
-    deleteAtBeginning(&head);
-
-    printf("After deletion:\n");
-    display(head);
+    displayForward(head);
+    displayBackward(head);
 
     return 0;
 }

@@ -26,19 +26,26 @@ void insertAtEnd(struct Node** head, int value) {
     newNode->prev = temp;
 }
 
-void deleteAtBeginning(struct Node** head) {
+void deleteAtEnd(struct Node** head) {
     if (*head == NULL) {
         printf("List is empty. Nothing to delete.\n");
         return;
     }
 
     struct Node* temp = *head;
-    *head = (*head)->next;
 
-    if (*head != NULL)
-        (*head)->prev = NULL;
+    if (temp->next == NULL) {
+        printf("Deleted node with data: %d\n", temp->data);
+        free(temp);
+        *head = NULL;
+        return;
+    }
+
+    while (temp->next != NULL)
+        temp = temp->next;
 
     printf("Deleted node with data: %d\n", temp->data);
+    temp->prev->next = NULL;
     free(temp);
 }
 
@@ -63,7 +70,7 @@ int main() {
     printf("Before deletion:\n");
     display(head);
 
-    deleteAtBeginning(&head);
+    deleteAtEnd(&head);
 
     printf("After deletion:\n");
     display(head);
